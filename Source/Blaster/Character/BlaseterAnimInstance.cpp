@@ -1,0 +1,32 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "BlaseterAnimInstance.h"
+#include "BlasterCharacter.h"
+#include "GameFramework/CharacterMovementComponent.h"
+
+void UBlaseterAnimInstance::NativeInitializeAnimation()
+{
+	Super::NativeInitializeAnimation();
+
+	BlasterCharacter = Cast<ABlasterCharacter>(TryGetPawnOwner());
+}
+
+void UBlaseterAnimInstance::NativeUpdateAnimation(float Deltatime)
+{
+	Super::NativeUpdateAnimation(Deltatime);
+
+	if (BlasterCharacter == nullptr)
+	{
+		BlasterCharacter = Cast<ABlasterCharacter>(TryGetPawnOwner());
+	}
+	if (BlasterCharacter == nullptr) return;
+
+	FVector Velocity = BlasterCharacter->GetVelocity();
+	Velocity.Z = 0.f;
+	Speed = Velocity.Size();
+
+	bIsInAir = BlasterCharacter->GetCharacterMovement()->IsFalling();
+
+	bIsAccelerating = BlasterCharacter->GetCharacterMovement()->GetCurrentAcceleration().Size() > 0.f ? true : false;
+}
