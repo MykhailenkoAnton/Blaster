@@ -1,18 +1,18 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "BlaseterAnimInstance.h"
+#include "BlasterAnimInstance.h"
 #include "BlasterCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
-void UBlaseterAnimInstance::NativeInitializeAnimation()
+void UBlasterAnimInstance::NativeInitializeAnimation()
 {
 	Super::NativeInitializeAnimation();
 
 	BlasterCharacter = Cast<ABlasterCharacter>(TryGetPawnOwner());
 }
 
-void UBlaseterAnimInstance::NativeUpdateAnimation(float Deltatime)
+void UBlasterAnimInstance::NativeUpdateAnimation(float Deltatime)
 {
 	Super::NativeUpdateAnimation(Deltatime);
 
@@ -30,3 +30,4 @@ void UBlaseterAnimInstance::NativeUpdateAnimation(float Deltatime)
 
 	bIsAccelerating = BlasterCharacter->GetCharacterMovement()->GetCurrentAcceleration().Size() > 0.f ? true : false;
 }
+
