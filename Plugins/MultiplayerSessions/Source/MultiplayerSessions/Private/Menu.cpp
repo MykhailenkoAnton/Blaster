@@ -107,6 +107,13 @@ void UMenu::OnFindSessions(const TArray<FOnlineSessionSearchResult>& SessionResu
 	{
 		FString SettingsValue;
 		Result.Session.SessionSettings.Get(FName("MatchType"), SettingsValue);
+
+		if (Result.Session.SessionSettings.bIsDedicated == false)
+		{
+			Result.Session.SessionSettings.bUsesPresence = true;
+			Result.Session.SessionSettings.bUseLobbiesIfAvailable = true;
+		}
+
 		if (SettingsValue == MatchType)
 		{
 			MultiplayerSessionsSubsystem->JoinSession(Result);
