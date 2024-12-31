@@ -74,9 +74,6 @@ Plugins/**/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
-<<<<<<< HEAD
 
 # SVN
 Content/*
-=======
->>>>>>> ac35050461cd8ec115fc8dc50d588a5d3a58f4c3
