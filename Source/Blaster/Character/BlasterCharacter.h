@@ -45,11 +45,15 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	UInputAction* EquipAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* CrouchAction;
+
 private:
 
 	void Look(const FInputActionValue& value);
 	void Move(const FInputActionValue& value);
-	void EquipButtonPress(const FInputActionValue& value);
+	void EquipButtonPressed(const FInputActionValue& value); 
+	void CrouchButtonPressed(const FInputActionValue& value);
 
 public:
 
