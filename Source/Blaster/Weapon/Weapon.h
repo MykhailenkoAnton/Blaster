@@ -40,6 +40,7 @@ protected:
 public:
 
 	void ShowPickupWidget(bool bShowWidget);
+	FORCEINLINE void SetWeaponState(EWeaponState state) { WeaponState = state; }
 
 private:	
 
