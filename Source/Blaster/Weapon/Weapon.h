@@ -16,6 +16,8 @@ enum class EWeaponState : uint8
 	EWS_MAX UMETA(DisplayName = "DefaultMAX")
 };
 
+class USphereComponent;
+
 UCLASS()
 class BLASTER_API AWeapon : public AActor
 {
@@ -26,6 +28,7 @@ public:
 	AWeapon();
 
 	virtual void Tick(float DeltaTime) override;
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 protected:
 
@@ -40,7 +43,10 @@ protected:
 public:
 
 	void ShowPickupWidget(bool bShowWidget);
-	FORCEINLINE void SetWeaponState(EWeaponState state) { WeaponState = state; }
+
+	void SetWeaponState(EWeaponState state);
+
+	FORCEINLINE USphereComponent* GetAreaSphere() const { return AreaSphere; }
 
 private:	
 
@@ -48,10 +54,13 @@ private:
 	USkeletalMeshComponent* WeaponMesh;
 
 	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
-	class USphereComponent* AreaSphere;
+	USphereComponent* AreaSphere;
 
-	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
+	UPROPERTY(ReplicatedUsing = OnRep_WeaponState, VisibleAnywhere, Category = "Weapon Properties")
 	EWeaponState WeaponState;
+
+	UFUNCTION()
+	void OnRep_WeaponState();
 
 	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
 	class UWidgetComponent* PickupWidget;
